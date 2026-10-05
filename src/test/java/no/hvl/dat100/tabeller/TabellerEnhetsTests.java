@@ -1,113 +1,126 @@
 package no.hvl.dat100.tabeller;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
+public class  Tabeller {
 
-@Timeout(30)
-class TabellerEnhetsTests {
+	// a)
+	public static void skrivUt(int[] tabell) {
 
-	private static int[] tabell1, tabell2, tabell3;
-
-	@BeforeEach
-	public void initEach() {
-
-		tabell1 = new int[3];
-		tabell1[0] = 1;
-		tabell1[1] = 4;
-		tabell1[2] = 6;
-
-		tabell2 = new int[1];
-		tabell2[0] = 1;
-
-		tabell3 = new int[0];
-
+		// TODO
+		System.out.println(tilStreng(tabell));
 	}
 
-	@Test
-	void testSkrivUt() {
+	// b)
+	public static String tilStreng(int[] tabell) {
 
-		Tabeller.skrivUt(tabell1);
-		Tabeller.skrivUt(tabell2);
-		Tabeller.skrivUt(tabell3);
-	}
+		// TODO
+		String resultat = "[";
 
-	@Test
-	void testtilStreng() {
+		for (int i = 0; i < tabell.length; i++) {
+			resultat += tabell[i];
 
-		assertEquals("[1,4,6]", Tabeller.tilStreng(tabell1));
-		assertEquals("[1]", Tabeller.tilStreng(tabell2));
-		assertEquals("[]", Tabeller.tilStreng(tabell3));
-	}
+			if (i < tabell.length - 1) {
+				resultat += ",";
+			}
+		}
 
-	@Test
-	void testSummer() {
-		assertEquals(11, Tabeller.summer(tabell1));
-		assertEquals(1, Tabeller.summer(tabell2));
-		assertEquals(0, Tabeller.summer(tabell3));
-	}
-
-	@Test
-	void testfinnesTall() {
-		assertTrue(Tabeller.finnesTall(tabell1, 1));
-		assertTrue(Tabeller.finnesTall(tabell1, 4));
-		assertTrue(Tabeller.finnesTall(tabell1, 6));
-
-		assertFalse(Tabeller.finnesTall(tabell1, 7));
-		assertFalse(Tabeller.finnesTall(tabell3, 7));
-	}
-
-	@Test
-	void testposisjonTall() {
-
-		assertEquals(0, Tabeller.posisjonTall(tabell1, 1));
-		assertEquals(1, Tabeller.posisjonTall(tabell1, 4));
-		assertEquals(2, Tabeller.posisjonTall(tabell1, 6));
-
-		assertEquals(-1, Tabeller.posisjonTall(tabell1, 7));
-		assertEquals(-1, Tabeller.posisjonTall(tabell3, 7));
-
-	}
-
-	@Test
-	void testreverser() {
-
-		int[] tabell = { 6, 4, 1 };
-
-		int[] reversert1 = Tabeller.reverser(tabell1);
-		int[] reversert2 = Tabeller.reverser(tabell2);
-		int[] reversert3 = Tabeller.reverser(tabell3);
-
-		assertFalse(tabell1 == reversert1); // reverse must allocate new array
-		assertArrayEquals(tabell, reversert1);
-		
-		assertFalse(tabell2 == reversert2);
-		assertArrayEquals(tabell2, reversert2);
-		
-		assertFalse(tabell3 == reversert3);
-		assertArrayEquals(tabell3, reversert3);
-	}
-
-	@Test
-	void erSortert() {
-
-		int[] tabell = { 6, 4, 1 };
-
-		assertTrue(Tabeller.erSortert(tabell1));
-		assertTrue(Tabeller.erSortert(tabell2));
-		assertTrue(Tabeller.erSortert(tabell3));
-
-		assertFalse(Tabeller.erSortert(tabell));
-	}
-
-	@Test
-	void testsettSammen() {
-
-		int[] tabell = { 1, 1, 4, 6 };
-
-		assertArrayEquals(tabell, Tabeller.settSammen(tabell2, tabell1));
-		assertArrayEquals(tabell1, Tabeller.settSammen(tabell3, tabell1));
-		assertArrayEquals(tabell1, Tabeller.settSammen(tabell1, tabell3));
+		resultat += "]";
+		return resultat;
 	}
 }
+
+// c)
+public static int summer(int[] tabell) {
+
+	// TODO
+	int sum = 0;
+
+	for (int tall : tabell) {
+		sum += tall;
+	}
+
+	return sum;
+}
+	}
+
+// d)
+public static boolean finnesTall(int[] tabell, int tall) {
+
+	// TODO
+	for (int verdi : tabell) {
+		if (verdi == tall) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+	}
+
+// e)
+public static int posisjonTall(int[] tabell, int tall) {
+
+	// TODO
+	for (int i = 0; i < tabell.length; i++) {
+		if (tabell[i] == tall) {
+			return i;
+		}
+	}
+
+	return -1;
+}
+
+	}
+
+// f)
+public static int[] reverser(int[] tabell) {
+
+	// TODO
+	int[] nyTabell = new int[tabell.length];
+
+	for (int i = 0; i < tabell.length; i++) {
+		nyTabell[i] = tabell[tabell.length - 1 - i];
+	}
+
+	return nyTabell;
+}
+	}
+
+// g)
+public static boolean erSortert(int[] tabell) {
+
+	// TODO
+	for (int i = 1; i < tabell.length; i++) {
+
+		if (tabell[i] < tabell[i - 1]) {
+			return false;
+		}
+
+	}
+
+	return true;
+}
+
+	}
+
+// h)
+public static int[] settSammen(int[] tabell1, int[] tabell2) {
+
+	// TODO
+	int[] nyTabell = new int[tabell1.length + tabell2.length];
+
+	for (int i = 0; i < tabell1.length; i++) {
+		nyTabell[i] = tabell1[i];
+	}
+
+	for (int i = 0; i < tabell2.length; i++) {
+		nyTabell[tabell1.length + i] = tabell2[i];
+	}
+
+	return nyTabell;
+}
+
+
+	}
+			}
+
